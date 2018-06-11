@@ -204,9 +204,9 @@ public class Multi_Level_Selector extends PopupWindow implements View.OnClickLis
                 if(list_multi_for_display_index.size() <= index) {
                     list_multi_for_display_index.add(position);
                 } else {
-                    if(list_multi_for_display_index.get(index) != position) {
+//                    if(list_multi_for_display_index.get(index) != position) {
                         ClearSubViews(index);
-                    }
+//                    }
                     if(list_multi_for_display_index.size() <= index) {
                         list_multi_for_display_index.add(position);
                     } else {
