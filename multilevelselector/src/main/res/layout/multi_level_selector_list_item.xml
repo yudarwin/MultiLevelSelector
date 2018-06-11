@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/rl_multi_level_selector_item_main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/margin_10dp"
+    android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_multi_level_selector_list_item"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_18"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_multi_level_selector_list_item"
+        android:id="@+id/iv_multi_level_selector_list_item"
+        android:src="@drawable/tick_multi_level_selector"
+        android:layout_marginLeft="@dimen/margin_5dp"
+        />
+
+</RelativeLayout>
