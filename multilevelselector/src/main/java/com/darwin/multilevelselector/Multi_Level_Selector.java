@@ -176,6 +176,8 @@ public class Multi_Level_Selector extends PopupWindow implements View.OnClickLis
 
         while (list_multi_for_display.size()-1 > index) {
             list_multi_for_display.remove(list_multi_for_display.size()-1);
+        }
+        while (list_multi_for_display_index.size()-1 > index) {
             list_multi_for_display_index.remove(list_multi_for_display_index.size()-1);
         }
     }
