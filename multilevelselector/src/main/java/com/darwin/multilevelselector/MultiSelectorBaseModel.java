@@ -3,9 +3,9 @@ package com.darwin.multilevelselector;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MultiSelectorBaseModel {
-    String textForDisplay;
-    List<MultiSelectorBaseModel> mSubList = new ArrayList<>();
+public class MultiSelectorBaseModel<T extends MultiSelectorBaseModel> {
+    public String textForDisplay;
+    public List<T> mSubList = new ArrayList<>();
     boolean bIsSelected;
 
     public boolean isbIsSelected() {
@@ -24,12 +24,12 @@ public class MultiSelectorBaseModel {
         this.textForDisplay = textForDisplay;
     }
 
-    public List<MultiSelectorBaseModel> getmSubList() {
+    public List<T> getmSubList() {
         return mSubList;
     }
 
-    public List<MultiSelectorBaseModel> getmSubListOriginal() {
-        List<MultiSelectorBaseModel> mSubListRes = mSubList;
+    public List<T> getmSubListOriginal() {
+        List<T> mSubListRes = mSubList;
         for(MultiSelectorBaseModel msbm : mSubListRes)
         {
             msbm.setbIsSelected(false);
@@ -37,7 +37,7 @@ public class MultiSelectorBaseModel {
         return mSubListRes;
     }
 
-    public void setmSubList(List<MultiSelectorBaseModel> mSubList) {
+    public void setmSubList(List<T> mSubList) {
         this.mSubList = mSubList;
     }
 }

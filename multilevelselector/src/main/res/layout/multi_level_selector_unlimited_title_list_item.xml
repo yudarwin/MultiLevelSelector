@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/rl_multi_level_selector_item_main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/margin_5dp"
+    android:orientation="horizontal">
+    <RelativeLayout
+        android:id="@+id/rl_level_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            />
+        <View
+            android:id="@+id/v_level"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/title_bar"
+            android:layout_below="@id/tv_level"
+            android:layout_marginTop="@dimen/margin_5dp"
+            />
+
+    </RelativeLayout>
+
+</RelativeLayout>

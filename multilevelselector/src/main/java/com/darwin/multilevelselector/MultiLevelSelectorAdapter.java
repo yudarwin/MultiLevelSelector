@@ -10,15 +10,15 @@ import com.chad.library.adapter.base.BaseViewHolder;
 
 import java.util.List;
 
-public class MultiLevelSelectorAdapter extends BaseQuickAdapter<MultiSelectorBaseModel, BaseViewHolder> {
+public class MultiLevelSelectorAdapter<T extends MultiSelectorBaseModel> extends BaseQuickAdapter<T, BaseViewHolder> {
     Context context;
-    public MultiLevelSelectorAdapter(Context context, @LayoutRes int layoutResId, @Nullable List<MultiSelectorBaseModel> data) {
+    public MultiLevelSelectorAdapter(Context context, @LayoutRes int layoutResId, @Nullable List<T> data) {
         super(layoutResId, data);
         this.context = context;
     }
 
     @Override
-    protected void convert(BaseViewHolder viewHolder, MultiSelectorBaseModel data) {
+    protected void convert(BaseViewHolder viewHolder, T data) {
         viewHolder.setText(R.id.tv_multi_level_selector_list_item, data.getTextForDisplay())
                 .setVisible(R.id.iv_multi_level_selector_list_item, data.isbIsSelected())
                 .setTextColor(R.id.tv_multi_level_selector_list_item,data.isbIsSelected()?context.getResources().getColor(R.color.title_bar):context.getResources().getColor(R.color.black))

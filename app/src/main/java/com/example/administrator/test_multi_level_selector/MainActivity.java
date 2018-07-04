@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.darwin.multilevelselector.MultiLevelSelectorCallBack;
 import com.darwin.multilevelselector.MultiSelectorBaseModel;
 import com.darwin.multilevelselector.Multi_Level_Selector;
+import com.darwin.multilevelselector.Multi_Level_Selector_Unlimited;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private TextView tv_depart;
-    private Multi_Level_Selector mls;
+    private Multi_Level_Selector_Unlimited mls;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -276,9 +277,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void initPopupWindow() {
         initData();
-        mls = new Multi_Level_Selector(this, "请选择部门", list, new MultiLevelSelectorCallBack() {
+        mls = new Multi_Level_Selector_Unlimited(this, "请选择部门", list, new MultiLevelSelectorCallBack() {
             @Override
-            public void success(String res) {
+            public void success(String res, MultiSelectorBaseModel obj) {
                 tv_depart.setText(res);
             }
         });

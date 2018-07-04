@@ -18,15 +18,15 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Multi_Level_Selector extends PopupWindow implements View.OnClickListener{
+public class Multi_Level_Selector<T extends MultiSelectorBaseModel> extends PopupWindow implements View.OnClickListener{
 
     private static final int MAX_INDEX_TABS = 5;
 
     private final Context context;
     private final String title;
     private final MultiLevelSelectorCallBack callBack;
-    private List<MultiSelectorBaseModel> list = new ArrayList<>();
-    private List<List<MultiSelectorBaseModel>> list_multi_for_display = new ArrayList<>();
+    private List<T> list = new ArrayList<>();
+    private List<List<T>> list_multi_for_display = new ArrayList<>();
     private List<Integer> list_multi_for_display_index = new ArrayList<>();
     private int mWidth;
     private int mHeight;
@@ -36,7 +36,7 @@ public class Multi_Level_Selector extends PopupWindow implements View.OnClickLis
     private View v_level_1, v_level_2, v_level_3, v_level_4, v_level_5;
     private RecyclerView recycleview_multi_level_selector;
     private int CurrentLevel = 0;
-    private List<MultiSelectorBaseModel> CurrentShowList = new ArrayList<>();
+//    private List<MultiSelectorBaseModel> CurrentShowList = new ArrayList<>();
     private List<TextView> mTextViewList = new ArrayList<>();
     private List<View> mViewList = new ArrayList<>();
     private List<RelativeLayout> mRelativeLayoutList = new ArrayList<>();
@@ -47,7 +47,7 @@ public class Multi_Level_Selector extends PopupWindow implements View.OnClickLis
     private MultiLevelSelectorAdapter mAdapter3;
     private MultiLevelSelectorAdapter mAdapter4;
 
-    public Multi_Level_Selector(Context context, String title, List<MultiSelectorBaseModel> list, MultiLevelSelectorCallBack callBack) {
+    public Multi_Level_Selector(Context context, String title, List<T> list, MultiLevelSelectorCallBack callBack) {
         super(context);
         this.context = context;
         this.list = list;
@@ -138,7 +138,7 @@ public class Multi_Level_Selector extends PopupWindow implements View.OnClickLis
         CurrentLevel = 0;
         tv_level_1.setText("请选择");
         list_multi_for_display.add(list);
-        CurrentShowList = list;
+//        CurrentShowList = list;
         setClickAble( 0);
         showLevelView(0);
     }
@@ -182,7 +182,7 @@ public class Multi_Level_Selector extends PopupWindow implements View.OnClickLis
         }
     }
 
-    public void setSelect(List<MultiSelectorBaseModel> list,int position) {
+    public void setSelect(List<T> list,int position) {
         for (int i = 0; i <list.size();i++) {
             if(i == position) {
                 list.get(i).setbIsSelected(true);
@@ -204,7 +204,9 @@ public class Multi_Level_Selector extends PopupWindow implements View.OnClickLis
                 if(list_multi_for_display_index.size() <= index) {
                     list_multi_for_display_index.add(position);
                 } else {
-                    ClearSubViews(index);
+//                    if(list_multi_for_display_index.get(index) != position) {
+                        ClearSubViews(index);
+//                    }
                     if(list_multi_for_display_index.size() <= index) {
                         list_multi_for_display_index.add(position);
                     } else {
@@ -221,7 +223,7 @@ public class Multi_Level_Selector extends PopupWindow implements View.OnClickLis
                         }
                         StrRes +=list_multi_for_display.get(i).get(list_multi_for_display_index.get(i)).getTextForDisplay();
                     }
-                    callBack.success(StrRes);
+                    callBack.success(StrRes,list_multi_for_display.get(index).get(list_multi_for_display_index.get(index)));
                     dismiss();
                 } else {
                     if(index == MAX_INDEX_TABS-1) {
@@ -284,6 +286,10 @@ public class Multi_Level_Selector extends PopupWindow implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        if(list.size() <= 0)
+        {
+            return;
+        }
         int id = v.getId();
         if(id == R.id.rl_level_1) {
             showLevelView(0);
@@ -306,7 +312,15 @@ public class Multi_Level_Selector extends PopupWindow implements View.OnClickLis
                 }catch (Exception e) {
                 }
             }
-            callBack.success(StrRes);
+            try {
+                callBack.success(StrRes,list_multi_for_display.get(CurrentLevel).get(list_multi_for_display_index.get(CurrentLevel)));
+            }
+            catch (Exception e)
+            {
+                //以防出现当前CurrentLevel没有选择的情况返回上一个节点数据
+                callBack.success(StrRes,list_multi_for_display.get(CurrentLevel-1).get(list_multi_for_display_index.get(CurrentLevel-1)));
+            }
+
             dismiss();
         }
     }
